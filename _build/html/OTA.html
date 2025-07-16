@@ -1,0 +1,946 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MA1181 通用数据协议 &mdash; MCT Developer Manual  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="MA1181 Developer Manual" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MCT Developer Manual
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Quick Start</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MA1181 通用数据协议</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ota">OTA 升级数据包</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">获取诊断信息</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">域控请求</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#imu">IMU 回复</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">获取分区信息</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">域控请求</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">IMU回复</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#appbootloader">App跳转Bootloader</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">域控请求</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">IMU回复</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bootloaderapp">Bootloader跳转App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">域控请求</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">IMU回复</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#boot">Boot版本号查询协议</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">主机请求协议</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">IMU 响应协议</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">OTA烧写请求</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id13">主机请求协议</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">IMU 响应协议</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MCT Developer Manual</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">MA1181 通用数据协议</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/OTA.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ma1181">
+<h1>MA1181 通用数据协议<a class="headerlink" href="#ma1181" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Start 1</p></td>
+<td><p>Start 2</p></td>
+<td><p>Frame type</p></td>
+<td><p>Data content</p></td>
+<td><p>Check 1</p></td>
+<td><p>Check 2</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Description:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Start: 每帧报文固定使用 2 字节: 0xBD 0x64.</p></li>
+<li><p>Frame type: 1 字节功能码.</p></li>
+<li><p>Data content: 59 字节.</p></li>
+<li><p>Check: 2 字节 crc16 校验, 低字节在前, 校验范围为Start到最后一个Data content, 校验算法如下:</p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">CalculateCRC16</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">puchMsg</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">len</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">wCRCin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFFFFu</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">wCPoly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1021u</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">wChar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0u</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">len</span><span class="o">--</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">wChar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">puchMsg</span><span class="o">++</span><span class="p">);</span>
+<span class="w">        </span><span class="n">wCRCin</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="p">(</span><span class="n">wChar</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">8u</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0u</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8u</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">wCRCin</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x8000u</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">wCRCin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">wCRCin</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w">   </span><span class="mi">1u</span><span class="p">)</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">wCPoly</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">wCRCin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wCRCin</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w">   </span><span class="mi">1u</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">wCRCin</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="ota">
+<h1>OTA 升级数据包<a class="headerlink" href="#ota" title="Link to this heading">¶</a></h1>
+<section id="id1">
+<h2>获取诊断信息<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<section id="id2">
+<h3>域控请求<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Format</p></th>
+<th class="head"><p>Length (Byte)</p></th>
+<th class="head"><p>LSB/MSB</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0-1</p></td>
+<td><p>0x8D</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1-1</p></td>
+<td><p>0x64</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-even"><td><p>2-1</p></td>
+<td><p>0x08</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Function code</p></td>
+</tr>
+<tr class="row-odd"><td><p>3-61</p></td>
+<td><p>0x00</p></td>
+<td><p>UChar</p></td>
+<td><p>59</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Default 0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>62-63</p></td>
+<td><p>0xXX</p></td>
+<td><p>UShort</p></td>
+<td><p>2</p></td>
+<td><p>LSB</p></td>
+<td><p>CRC</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="imu">
+<h3>IMU 回复<a class="headerlink" href="#imu" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Format</p></th>
+<th class="head"><p>Length (Byte)</p></th>
+<th class="head"><p>LSB/MSB</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0-1</p></td>
+<td><p>0x8D</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1-1</p></td>
+<td><p>0x64</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-even"><td><p>2-1</p></td>
+<td><p>0x09</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Function code</p></td>
+</tr>
+<tr class="row-odd"><td><p>3-4</p></td>
+<td><p>0xXX</p></td>
+<td><p>UChar</p></td>
+<td><p>2</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>MCT output (fixed 0x4D 0x33)</p></td>
+</tr>
+<tr class="row-even"><td><p>5-1</p></td>
+<td><p>0xXX</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><p>LSB</p></td>
+<td><p>Output frequency(0xA0=1000Hz)</p></td>
+</tr>
+<tr class="row-odd"><td><p>6-25</p></td>
+<td><p>0xXX</p></td>
+<td><p>UChar</p></td>
+<td><p>20</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>SN code</p></td>
+</tr>
+<tr class="row-even"><td><p>26-33</p></td>
+<td><p>0xXX</p></td>
+<td><p>UChar</p></td>
+<td><p>8</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>HW version (4 digits)</p></td>
+</tr>
+<tr class="row-odd"><td><p>34-41</p></td>
+<td><p>0xXX</p></td>
+<td><p>UChar</p></td>
+<td><p>8</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>SW version (4 digits)</p></td>
+</tr>
+<tr class="row-even"><td><p>42-61</p></td>
+<td><p>0x00</p></td>
+<td><p>UChar</p></td>
+<td><p>20</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Default 0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>62-63</p></td>
+<td><p>0xXX</p></td>
+<td><p>UShort</p></td>
+<td><p>2</p></td>
+<td><p>LSB</p></td>
+<td><p>CRC</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">版本号示例:</div>
+<div class="line">例如, SW01 为: 00 00 00 00 53 57 30 31</div>
+<div class="line"><strong>版本号按照数字叠加 (SW01, SW02, SW03, etc.), HW同理.</strong></div>
+</div>
+</section>
+</section>
+<section id="id3">
+<h2>获取分区信息<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<section id="id4">
+<h3>域控请求<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Format</p></th>
+<th class="head"><p>Length (Byte)</p></th>
+<th class="head"><p>LSB/MSB</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0x8D</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0x64</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0x08</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Function code</p></td>
+</tr>
+<tr class="row-odd"><td><p>3-61</p></td>
+<td><p>0x00</p></td>
+<td><p>UChar</p></td>
+<td><p>59</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Default 0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>62-63</p></td>
+<td><p>0xXX</p></td>
+<td><p>UShort</p></td>
+<td><p>2</p></td>
+<td><p>LSB</p></td>
+<td><p>CRC</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id5">
+<h3>IMU回复<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Format</p></th>
+<th class="head"><p>Length (Byte)</p></th>
+<th class="head"><p>LSB/MSB</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0x8D</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0x64</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0x08</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Function code</p></td>
+</tr>
+<tr class="row-odd"><td><p>3-4</p></td>
+<td><p>0xXX</p></td>
+<td><p>UChar</p></td>
+<td><p>2</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>AA||BB||NA</p></td>
+</tr>
+<tr class="row-even"><td><p>5-61</p></td>
+<td><p>0x00</p></td>
+<td><p>UChar</p></td>
+<td><p>57</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Default 0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>62-63</p></td>
+<td><p>0xXX</p></td>
+<td><p>UShort</p></td>
+<td><p>2</p></td>
+<td><p>LSB</p></td>
+<td><p>CRC</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><strong>当前有效分区为A分区, 则回复AA, 当前有效分区为B分区, 则回复BB, 若当前AB分区均未激活则回复NA.</strong></div>
+</div>
+</section>
+</section>
+<section id="appbootloader">
+<h2>App跳转Bootloader<a class="headerlink" href="#appbootloader" title="Link to this heading">¶</a></h2>
+<section id="id6">
+<h3>域控请求<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Format</p></th>
+<th class="head"><p>Length (Byte)</p></th>
+<th class="head"><p>LSB/MSB</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0x8D</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0x64</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0x30</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Function code</p></td>
+</tr>
+<tr class="row-odd"><td><p>3-61</p></td>
+<td><p>0x00</p></td>
+<td><p>UChar</p></td>
+<td><p>59</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Default 0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>62-63</p></td>
+<td><p>0xXX</p></td>
+<td><p>UShort</p></td>
+<td><p>2</p></td>
+<td><p>LSB</p></td>
+<td><p>CRC</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id7">
+<h3>IMU回复<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">IMU收到后会立刻跳转到Bootloader, 所以无回复, 可通过后续其他命令比如获取bootloader版本信息等判断是否跳转成功</div>
+</div>
+</section>
+</section>
+<section id="bootloaderapp">
+<h2>Bootloader跳转App<a class="headerlink" href="#bootloaderapp" title="Link to this heading">¶</a></h2>
+<section id="id8">
+<h3>域控请求<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Format</p></th>
+<th class="head"><p>Length (Byte)</p></th>
+<th class="head"><p>LSB/MSB</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0x8D</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0x64</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0x20</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Function code</p></td>
+</tr>
+<tr class="row-odd"><td><p>3-61</p></td>
+<td><p>0x00</p></td>
+<td><p>UChar</p></td>
+<td><p>59</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Default 0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>62-63</p></td>
+<td><p>0xXX</p></td>
+<td><p>UShort</p></td>
+<td><p>2</p></td>
+<td><p>LSB</p></td>
+<td><p>CRC</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id9">
+<h3>IMU回复<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<div class="line-block">
+<div class="line">IMU收到后会立刻跳转到App, 所以无回复, 可通过后续其他命令比如获取应用报文等判断是否跳转成功</div>
+</div>
+</section>
+</section>
+<section id="boot">
+<h2>Boot版本号查询协议<a class="headerlink" href="#boot" title="Link to this heading">¶</a></h2>
+<section id="id10">
+<h3>主机请求协议<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Format</p></th>
+<th class="head"><p>Length (Byte)</p></th>
+<th class="head"><p>LSB/MSB</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0xBD</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0x64</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0x06</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Function code</p></td>
+</tr>
+<tr class="row-odd"><td><p>3-61</p></td>
+<td><p>0x00</p></td>
+<td><p>UChar</p></td>
+<td><p>59</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Default 0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>62-63</p></td>
+<td><p>0xXX</p></td>
+<td><p>UShort</p></td>
+<td><p>2</p></td>
+<td><p>LSB</p></td>
+<td><p>CRC</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id11">
+<h3>IMU 响应协议<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Format</p></th>
+<th class="head"><p>Length (Byte)</p></th>
+<th class="head"><p>LSB/MSB</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0xBD</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0x64</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0x06</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Function code</p></td>
+</tr>
+<tr class="row-odd"><td><p>3-34</p></td>
+<td><p>0xXX</p></td>
+<td><p>UChar</p></td>
+<td><p>32</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Boot version</p></td>
+</tr>
+<tr class="row-even"><td><p>35-61</p></td>
+<td><p>0x00</p></td>
+<td><p>UChar</p></td>
+<td><p>27</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Default 0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>62-63</p></td>
+<td><p>0xXX</p></td>
+<td><p>UShort</p></td>
+<td><p>2</p></td>
+<td><p>LSB</p></td>
+<td><p>CRC</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">bootloader版本号分为产品名称及版本号, 示例: “MA1181X, IMU App v01.00.00-rc”</div>
+</div>
+</section>
+</section>
+<section id="id12">
+<h2>OTA烧写请求<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h2>
+<section id="id13">
+<h3>主机请求协议<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Format</p></th>
+<th class="head"><p>Length (Byte)</p></th>
+<th class="head"><p>LSB/MSB</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0xBD</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0x64</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0x21</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Function code</p></td>
+</tr>
+<tr class="row-odd"><td><p>3-5</p></td>
+<td><p>0xXX</p></td>
+<td><p>UChar</p></td>
+<td><p>3</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Address Offset</p></td>
+</tr>
+<tr class="row-even"><td><p>6-61</p></td>
+<td><p>0xXX</p></td>
+<td><p>UChar</p></td>
+<td><p>56</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Firmware data</p></td>
+</tr>
+<tr class="row-odd"><td><p>62-63</p></td>
+<td><p>0xXX</p></td>
+<td><p>UShort</p></td>
+<td><p>2</p></td>
+<td><p>LSB</p></td>
+<td><p>CRC</p></td>
+</tr>
+</tbody>
+</table>
+<p>Address Offset: <strong>3字节地址偏移, 高字节在前</strong></p>
+</section>
+<section id="id14">
+<h3>IMU 响应协议<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offset</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Format</p></th>
+<th class="head"><p>Length (Byte)</p></th>
+<th class="head"><p>LSB/MSB</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0xBD</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0x64</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Header (fixed)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0x06</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Function code</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>0xXX</p></td>
+<td><p>UChar</p></td>
+<td><p>1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Upgrade status</p></td>
+</tr>
+<tr class="row-even"><td><p>4-61</p></td>
+<td colspan="2"><p>0x00        | UChar</p></td>
+<td><p>58</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>Default 0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>62-63</p></td>
+<td><p>0xXX</p></td>
+<td><p>UShort</p></td>
+<td><p>2</p></td>
+<td><p>LSB</p></td>
+<td><p>CRC</p></td>
+</tr>
+</tbody>
+</table>
+<p>Upgrade status: flash操作失败回复0, 成功回复1</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="MA1181 Developer Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, MCT Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
